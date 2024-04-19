@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    font-family: "Montserrat", sans-serif;
+}
+.navbar{
+    background-color: #67C6E3;
+    padding-right: 20px;
+    padding-left: 40px;
+}
+.nav-item{
+    margin-right: 35px;
+}
+.nav-link{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #fff;
+}
+.nav-link:hover{
+    color: black;
+}
+
+.btn.dropdown-toggle:active,.btn.dropdown-toggle:focus{
+       border-color: #fff;
+        box-shadow: none !important;
+}
+
+.dropdown-menu{
+    background-color: #67C6E3;
+}
+.dropdown-item{
+    font-weight: 500;
+    text-align: center;
+}
+.dropdown-item:hover{
+    background-color: #67C6E3;
+    color: white;
+}
+.btn{
+    font-weight: 600;
+    margin-right: 22px;
+}
+
+.logo{
+    width: 60px;
+    height: 62px;
+}
+
+.Garis{
+    width: 1svb; 
+    height: 35px; 
+    background-color: #485F6A;
+}
+.dashboard{
+    padding: 20px;
+    background-color: #DFF5FF;
+}
+
+.news{margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.dummyImage{
+    max-width: 460px;
+    max-height: 300px;
+}
+
+.card-title{
+    font-weight: 700;
+}
+
+.card-text{
+    margin-top: 16px;
+    font-weight: 400;
+    font-size: 16px;
+}
