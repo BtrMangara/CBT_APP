@@ -1,0 +1,36 @@
+
+
+.Dash{
+    height: 46rem;
+    /* background-color: #8BC6EC; */
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
+}
+
+.Login{
+    background-color: rgba(240, 244, 247,0.3);
+    width: 500px;
+    aspect-ratio: 1;
+}
+
+/* .input.form-control{
+    width: 450px;
+} */
+
+.row-no-padding {
+    [class*="col-"] {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+
+  .nisn::-webkit-inner-spin-button, 
+  .nisn::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+.link:hover{
+  color: #fff;
+}

@@ -1,0 +1,16 @@
+
+.Register{
+    background-color: rgba(240, 244, 247,0.3);
+    width: 600px;
+    aspect-ratio: 1;
+}
+
+.btn-nisn{
+    background-color: rgba(240, 244, 247,0.3);
+}
+.btn-nisn:hover{
+    background-color: rgba(240, 244, 247,0.50);
+}
+.btn-eye{
+    background-color: #fff;
+}
