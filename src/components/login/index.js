@@ -2,7 +2,6 @@ import React from 'react'
 import './css/login.css'
 import Logo from '../dashboard/img/twh.webp'
 import { FaLock } from "react-icons/fa";
-
 import { IoPersonOutline } from "react-icons/io5";
 
 export const Login = () => {
@@ -47,12 +46,12 @@ export const Login = () => {
           </div>
          
           <div className='col-10 ms-3 mb-3 text-center'>  
-          <span>Belum Memiliki Akun? Silahkan<a href='/register' className='link link-underline link-underline-opacity-0'> Daftar! </a></span>
+          <span>Belum Memiliki Akun? Silahkan<a href='/Register' className='link link-underline link-underline-opacity-0'> Daftar! </a></span>
           </div>
          
         
         </div>
-      </div>
+    </div>
 
 
   )

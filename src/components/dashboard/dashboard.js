@@ -22,7 +22,8 @@ export const Dashboard = () => {
             </div>
           </div>
         <div className='row row-gap-5'>
-          <div className='col-8 '>
+          <div className='col-8 bg-light'>
+            
             <div className='row row-gap-4 mt-3'>
               <div className='col-4'>
                 <div className="card border border-0" style={{ width: "18rem;" }}>
@@ -69,7 +70,27 @@ export const Dashboard = () => {
               </div>
               
             </div>
+
+            <div className='col-12 d-flex justify-content-end rounded'>
+              <nav aria-label="Page navigation example" className='bg-light'>
+                <ul class="pagination border border-0">
+                  <li class="page-item ">
+                    <a class="page-link border border-0 bg-light" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link border border-0 bg-light" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link border border-0 bg-light" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link border border-0 bg-light" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link border border-0 bg-light" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
           </div>
+        </div>
 
           <div className='col-4 rounded ps-5 rounded-2 gx-4 overflow-y-auto' style={{ height:'30rem' }} >
             <div className='row bg-light rounded row-gap-3 justify-content-center '>
@@ -137,25 +158,9 @@ export const Dashboard = () => {
              
             </div>
           </div>
-          <div className='col-12 d-flex justify-content-center rounded'>
-            <nav aria-label="Page navigation example">
-              <ul class="pagination ">
-                <li class="page-item border border-0">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item border border-0"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          
+          
+
         </div>        
       </div>
       
