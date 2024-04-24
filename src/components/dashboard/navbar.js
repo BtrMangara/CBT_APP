@@ -32,16 +32,12 @@ export const Navbar = () => {
             </div>
           </div>
         </nav>
-        <div className='dashboard'>
-          
-        <div className='Garis'>
-          <h3 style={{ fontWeight:700, marginTop:'20px', color:'#485F6A', marginLeft:'10px'}}>Pengumuman</h3>
-        </div>
-            <div className='news'>
-            <Dashboard/>
-            </div>
+
+      <div>
+      <Dashboard/>
+      </div>
         
-        </div>
+
     </div>
   )
 }

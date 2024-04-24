@@ -112,7 +112,9 @@ export const Register = () => {
           <span className="input-group-text btn-eye shadow-none border border-0" style={{ fontSize:'0.75rem' }}>
               +62
           </span>
-          <input className="form-control form-control-sm shadow-none border border-0" type="text" placeholder=""/>
+          <input type="number" className="nisn form-control form-control-sm shadow-none border border-0"  placeholder="" 
+          onkeydown='return false'
+          onwheel='return false'/>
           </div>
         </div>
       
@@ -123,6 +125,10 @@ export const Register = () => {
               <FaRegEyeSlash/>
             </button>
           </div>
+        </div>
+
+        <div className='col-12 '>
+          <button className='btn  w-100 btn-register'>Submit</button>
         </div>
 
       </div>
