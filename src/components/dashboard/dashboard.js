@@ -6,7 +6,7 @@ export const Dashboard = () => {
   return (
     <div className='dashboard'>
       <div className="container mt-4">
-          <div className='row gap-3'>
+          <div className='row gap-5 m-0 p-0'>
             
             <div className='col-8'> 
               <div className='Garis mb-3' >
@@ -21,32 +21,140 @@ export const Dashboard = () => {
 
             </div>
           </div>
-        <div className='row gap-5 row-gap-5'>
-          <div className='col-8 news-rows bg-light rounded rounded-2'>
-            <div className='row row-cols-1 row-cols-md-2 g-4 mb-3 mt-2'>
-             
-              <div class="col-4 ">
-              <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="..."/>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-</div>
+        <div className='row row-gap-5'>
+          <div className='col-8 '>
+            <div className='row row-gap-4 mt-3'>
+              <div className='col-4'>
+                <div className="card border border-0" style={{ width: "18rem;" }}>
+                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
+                  <div className="card-body border border-0">
+                    <h5 className="card-title">Card title</h5>
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+                  </div>
+                </div>
+              </div>
+              
+              <div className='col-4 '>
+                <div className="card border border-0" style={{ width: "18rem;" }}>
+                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
+                  <div className="card-body border border-0">
+                    <h5 className="card-title">Card title</h5>
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+                  </div>
+                </div>
+              </div>
+
+              <div className='col-4 '>
+                <div className="card border border-0" style={{ width: "18rem;" }}>
+                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
+                  <div className="card-body border border-0">
+                    <h5 className="card-title">Card title</h5>
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+                  </div>
+                </div>
+              </div>
+              
+              <div className='col-4 '>
+                <div className="card border border-0" style={{ width: "18rem;" }}>
+                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
+                  <div className="card-body border border-0">
+                    <h5 className="card-title">Card title</h5>
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+                  </div>
+                </div>
               </div>
               
             </div>
           </div>
 
-          <div className='col-3 bg-light rounder rounded-2'>
-            <h1>Hello World</h1>
+          <div className='col-4 rounded ps-5 rounded-2 gx-4 overflow-y-auto' style={{ height:'30rem' }} >
+            <div className='row bg-light rounded row-gap-3 justify-content-center '>
+              <div className='col-12'>
+                <div className='row align-items-center'>
+                  <div className='col-8'>
+                    <div class="card g-0 m-0 border border-0 bg-light">
+                      <div class="card-body">
+                        <span className='fs-2'>#1</span>
+                        <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='col-4'>
+                    <img src="https://placehold.co/400" className='img-fluid'></img>
+                  </div>
+                </div>
+              </div>
+
+              <div className='col-12'>
+                <div className='row align-items-center'>
+                  <div className='col-8'>
+                    <div class="card g-0 m-0 border border-0 bg-light">
+                      <div class="card-body">
+                        <span className='fs-2'>#1</span>
+                        <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
+                        {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
+                        {/* <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a> */}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='col-4'>
+                    <img src="https://placehold.co/400" className='img-fluid'></img>
+                  </div>
+                </div>
+                
+              </div>
+              
+              <div className='col-12'>
+                <div className='row align-items-center'>
+                  <div className='col-8'>
+                    <div class="card g-0 m-0 border border-0 bg-light">
+                      <div class="card-body">
+                        <span className='fs-2'>#1</span>
+                        <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
+                        {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
+                        {/* <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a> */}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='col-4'>
+                    <img src="https://placehold.co/400" className='img-fluid'></img>
+                  </div>
+                </div>
+                
+              </div>
+             
+            </div>
+          </div>
+          <div className='col-12 d-flex justify-content-center rounded'>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination ">
+                <li class="page-item border border-0">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item border border-0"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>        
       </div>
