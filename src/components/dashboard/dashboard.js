@@ -1,6 +1,6 @@
 import React from 'react'
-import DummyImage from './img/image1.jpg'
-
+// import DummyImage from './img/image1.jpg'
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export const Dashboard = () => {
   return (
@@ -25,6 +25,13 @@ export const Dashboard = () => {
           <div className='col-8 bg-light'>
             
             <div className='row row-gap-4 mt-3'>
+              <div className='col-12 d-flex justify-content-end ps-2'>
+                <div class="input-group mb-3 w-50">
+                  <span class="input-group-text shadow shadow-none border border-0 border-bottom rounded-0 bg-light"><FaMagnifyingGlass/></span>
+                  <input class="form-control shadow shadow-none border border-0 border-bottom rounded-0 bg-light" 
+                  type="text" placeholder="Search" aria-label="default input example"/>
+                </div>
+              </div>
               <div className='col-4'>
                 <div className="card border border-0" style={{ width: "18rem;" }}>
                   <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
@@ -120,9 +127,6 @@ export const Dashboard = () => {
                         <span className='fs-2'>#1</span>
                         <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
-                        {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
-                        {/* <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a> */}
                       </div>
                     </div>
                   </div>
@@ -157,9 +161,7 @@ export const Dashboard = () => {
               </div>
              
             </div>
-          </div>
-          
-          
+          </div>         
 
         </div>        
       </div>

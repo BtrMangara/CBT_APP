@@ -15,8 +15,13 @@ export const Navbar = () => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0 p-2">
-                
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 px-3 g-col-3">
+                <li class="nav-item ">
+                  <a class="nav-link fs-5" href="#">Berita</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fs-5" href="#">Pengumuman</a>
+                </li>
               </ul>
               <div className="d-flex" role="search">
               <div className="dropdown">

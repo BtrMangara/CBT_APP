@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './css/index.css'
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -6,23 +6,102 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
 import { FaRegEye } from "react-icons/fa";
 import Logo from '../dashboard/img/twh.webp'
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNisn } from '../../actions/userAction';
+import Swal from 'sweetalert2';
 
 export const Register = () => {
-
-  const [Eye, setEye] = useState(false)
-  const [Nisn, setNisn] = useState(false)
+  const {getNisnResult,getNisnLoading,getNisnError} = useSelector(
+    (state)=>state.UserReducers);
+  const noscroll=()=>{
+    return false
+  }
 
   const seePassword=()=>{
     setEye(!Eye);
   }
-
-  const cekNisn =()=>{
-    setNisn(true)
+  
+  const verifikasi=()=>{
+    navigate('/verifikasiEmail')
   }
 
-  const noscroll=()=>{
-    return false
+  const navigate = useNavigate();
+  const { register, resetField, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+
+  const [nisn, setnisn] = useState('')
+  const [Eye, setEye] = useState(false)
+  const [ValidNisn, setValidNisn] = useState(false)
+  const [isCheckNisn, setisCheckNisn] = useState(false)
+  const [Biodata, setBiodata] = useState({
+        nisn: '',
+        nama: '',
+        jk: '',
+        agama: '',
+        tanggal_lahir:'',
+        email:'',
+        wa:''
+  })
+
+  
+
+  const cekNisn =(data)=>{
+    // console.log(nisn)
+    setisCheckNisn(true)
+
+    // setnisn(data.nisn)
+    dispatch(getNisn(data.nisn));
+    
   }
+
+  const biodata = (data)=>{
+    // console.log(Biodata)
+    setBiodata({
+      nisn: data.nisn,
+      nama: data.nama,
+      jk: data.jk,
+      agama: data.agama,
+      tanggal_lahir: data.tanggal_lahir,
+      email: data.email,
+      wa: data.wa
+    }
+    );
+    
+   
+  }
+  
+  useEffect(() => {
+    
+    // console.log(nisn)
+
+    if (isCheckNisn) {
+      // cekNisn();
+      if (getNisnResult) {
+        biodata(getNisnResult.data);
+        setValidNisn(true);
+        Swal.fire({
+          title: "Data Siswa Ditemukan",
+          text: "Silahkan Isi Biodata Diri Anda!",
+          icon: "success",
+          showConfirmButton:false,
+          timer:1000
+        });
+        
+      }
+      else if(getNisnError){
+        Swal.fire({
+          title: getNisnError.message,
+          text: "Silahkan Periksa Nisn Anda!",
+          icon: "error",
+          showConfirmButton:false,
+          timer:1000
+        });
+      }
+    }
+
+  }, [getNisnResult,getNisnLoading,getNisnError])
 
   return (
     <div className='Dash d-flex justify-content-center align-items-center'>
@@ -34,21 +113,23 @@ export const Register = () => {
       <h3 className='text-center'>Silahkan Melakukan Registrasi Terlebih Dahulu</h3>
       </div>
       
-        <div className={`row justify-content-center ${Nisn === true?'visually-hidden':'' }`}>
+        <div className={`row justify-content-center ${ValidNisn === true?'visually-hidden':'' }`}>
           <div className='col-8'>  
-            <div className="input-group">
-              <span className='input-group-text mb-3'><IoPersonOutline/></span>
-              <div className="form-floating mb-3 ">
-                <input type="number" className="nisn form-control shadow-none border border-start-0 border-end-0" 
-                      id="nisn" 
-                      placeholder="Masukkan Nisn Anda"
-                      onKeyDown={noscroll} onWheel={noscroll}
-                      onScroll={noscroll}
-                      /> 
-                <label>Masukkan Nisn Anda</label>  
+          <form onSubmit={handleSubmit(cekNisn)}>
+              <div className="input-group">
+                <span className='input-group-text mb-3'><IoPersonOutline/></span>
+                <div className="form-floating mb-3 ">
+                  <input {...register('nisn')} type="number" className="nisn form-control shadow-none border border-start-0 border-end-0" 
+                        id="nisn" 
+                        placeholder="Masukkan Nisn Anda"
+                        onKeyDown={noscroll} onWheel={noscroll}
+                        onScroll={noscroll} 
+                        /> 
+                  <label>Masukkan Nisn Anda</label>  
+                </div>
+                <button className='btn btn-nisn input-group-text mb-3' type='submit'><FaMagnifyingGlass/></button>
               </div>
-              <button className='btn btn-nisn input-group-text mb-3' onClick={cekNisn}><FaMagnifyingGlass/></button>
-            </div>
+            </form>
           </div>
         </div>
         
@@ -56,8 +137,8 @@ export const Register = () => {
             <button className='btn btn-dark w-100' onClick={Register}><FaMagnifyingGlass className='mb-1'/> Cek Nisn</button>
           </div> */}
         
-      <div className={`row mb-3 p-0 gx-3 gy-0 m-0 px-4 ${Nisn === true ? "":"visually-hidden"}`}>
-
+      <div className={`row mb-3 p-0 gx-3 gy-0 m-0 px-4 ${ValidNisn === true ? "":"visually-hidden"}`}>
+          {/* {console.log(Biodata)} */}
         <div className='col-6'>
             <span>Nisn</span>
           <div className="input-group mb-3">
@@ -69,6 +150,7 @@ export const Register = () => {
             placeholder="123123"
             onkeydown="return false" onwheel="return false"
             disabled readonly
+            value={Biodata.nisn}
           /> 
           </div>
         </div>
@@ -79,31 +161,31 @@ export const Register = () => {
             <span className="input-group-text btn-nisn border border-0" >
               <FaRegUserCircle/>
             </span>
-          <input className="form-control form-control-sm shadow-sm" type="text" placeholder=""/>
+          <input className="form-control form-control-sm shadow-sm" type="text" placeholder="" value={Biodata.email}/>
           </div>
         </div>
         
         <div className='col-6'>
           <span>Nama</span>
           <div className="input-group mb-3">
-          <input className="form-control form-control-sm shadow-sm" type="text" placeholder=""/>
+          <input className="form-control form-control-sm shadow-sm" type="text" placeholder="" value={Biodata.nama}/>
           </div>
         </div>
       
         <div className='col-6 '>
           <span>Tanggal Lahir</span>
           <div className="input-group mb-3">
-          <input className="form-control form-control-sm shadow-sm" type="date" placeholder=""/>
+          <input className="form-control form-control-sm shadow-sm" type="date" placeholder="" value={Biodata.tanggal_lahir}/>
           </div>
         </div>
         
         <div className='col-6'>
           <span>Jenis Kelamin</span>
           <div className="input-group mb-3">
-          <select className="form-select form-select-sm shadow-sm" placeholder="">
+          <select className="form-select form-select-sm shadow-sm" placeholder=""value={Biodata.jk}>
           <option value=''disabled selected>Select Your Gender</option>
-            <option value="1">Laki-Laki</option>
-            <option value="2">Perempuan</option>
+            <option value="L">Laki-Laki</option>
+            <option value="K">Perempuan</option>
           </select>
 
           </div>
@@ -112,14 +194,14 @@ export const Register = () => {
         <div className='col-6 '>
           <span>Agama</span>
           <div className="input-group mb-3">
-          <select className="form-select form-select-sm shadow-sm " placeholder="Pilih Agama Kamu">
+          <select className="form-select form-select-sm shadow-sm " placeholder="Pilih Agama Kamu"value={Biodata.agama}>
             <option value=''disabled selected>Select Your Religion</option>
-            <option value="1">Protestan</option>
-            <option value="2">Islam</option>
-            <option value="3">Katolik</option>
-            <option value="3">Buddha</option>
-            <option value="3">Hindu</option>
-            <option value="3">Konghucu</option>
+            <option value="Protestan">Protestan</option>
+            <option value="Islam">Islam</option>
+            <option value="Katolik">Katolik</option>
+            <option value="Buddha">Buddha</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Konghucu">Konghucu</option>
           </select>
           </div>
         </div>
@@ -132,7 +214,8 @@ export const Register = () => {
           </span>
           <input type="number" className="nisn form-control form-control-sm shadow-none border border-0"  placeholder="" 
           onkeydown='return false'
-          onwheel='return false'/>
+          onwheel='return false'
+          value={Biodata.wa}/>
           </div>
         </div>
       
@@ -147,7 +230,7 @@ export const Register = () => {
         </div>
 
         <div className='col-12 '>
-          <button className='btn  w-100 btn-register'>Submit</button>
+          <button className='btn  w-100 btn-register' onClick={verifikasi}>Submit</button>
         </div>
 
       </div>

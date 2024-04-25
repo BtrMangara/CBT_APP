@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './css/login.css'
 import Logo from '../dashboard/img/twh.webp'
 import { FaLock } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
+import { useDispatch } from 'react-redux';
+import { getLogin } from '../../actions/userAction';
 
 export const Login = () => {
+
+  const dispatch = useDispatch();
+  
+  const nisn = `0026061643`;
+
+  useEffect(() => {
+    dispatch(getLogin(nisn))
+  }, [dispatch])
+
   return (
     <div className='Dash d-flex justify-content-center align-items-center'>
       <div className="Login row border border-1 shadow shadow-sm justify-content-center" >
