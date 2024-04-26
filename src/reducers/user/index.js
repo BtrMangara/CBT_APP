@@ -1,4 +1,4 @@
-import { GET_LOGIN, GET_NISN } from "../../actions/userAction";
+import { GET_LOGIN, GET_NISN, REGISTER_SISWA } from "../../actions/userAction";
 
 const initialState={
     getLoginResult : false,
@@ -8,6 +8,10 @@ const initialState={
     getNisnResult:false,
     getNisnLoading:false,
     getNisnError:false,
+
+    getRegistrasiSiswaResult:false,
+    getRegistrasiSiswaLoading:false,
+    getRegistrasiSiswaError:false,
 }
 
 const user = (state = initialState,action)=>{
@@ -25,7 +29,15 @@ const user = (state = initialState,action)=>{
                 ...state,
                 getNisnResult:action.payload.data,
                 getNisnLoading:action.payload.Loading,
-                getNisnError:action.payload.errorMessage
+                getNisnError:action.payload.errorMessage,
+            }
+
+        case REGISTER_SISWA:
+            return{
+                ...state,
+                getRegistrasiSiswaResult:action.payload.data,
+                getRegistrasiSiswaLoading:action.payload.Loading,
+                getRegistrasiSiswaError:action.payload.errorMessage,
             }
         default:
             return state;

@@ -7,6 +7,8 @@ export const GET_LOGIN = 'GET_LOGIN';
 export const GET_NISN = 'GET_NISN';
 export const GET_BERITA = 'GET_BERITA';
 export const GET_PENGUMUMAN = 'GET_PENGUMUMAN';
+export const REGISTER_SISWA = 'REGISTER_SISWA'
+
 
 export const getLogin=(nisn)=>{
     return async(dispatch)=>{
@@ -84,7 +86,7 @@ export const getNisn=(data)=>{
             })
         })
         .catch((error)=>{
-            // console.log(error.response.data.message)
+        //    console.log(error)
             dispatch({
                 type:GET_NISN,
                 payload:{
@@ -188,3 +190,45 @@ export const getPengumuman = (data)=>{
 
     }
 }
+
+export const registerSiswa = (data)=>{
+    console.log(data)
+    return async(dispatch)=>{
+        dispatch({
+            type:REGISTER_SISWA,
+            payload:{
+                loading:false,
+                data:false,
+                errorMessage:false,
+            }
+        })
+        await axios({
+            method:'POST',
+            url:`${URL_API}register`,
+            data:data,
+            timeout:12000
+        })
+        .then((response)=>{
+            dispatch({
+                type:REGISTER_SISWA,
+                payload:{
+                    loading:false,
+                    data:response.data,
+                    errorMessage:false
+                }
+            })
+        })
+        .catch((error)=>{
+            dispatch({
+                type:REGISTER_SISWA,
+                payload:{
+                    loading:false,
+                    data:false,
+                    errorMessage:error
+                }
+            })
+        })
+    }
+}
+
+

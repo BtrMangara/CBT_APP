@@ -7,6 +7,7 @@ import { Navbar } from './components/dashboard/navbar';
 import { Login } from './components/login/login';
 import { Register } from "./components/register/register";
 import Verifikasi from "./components/verifikasi/verifikasi";
+import FormRegister from "./components/register/formRegister";
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/verifikasiEmail' element={<Verifikasi/>}/>
         
+        <Route path='/registerBiodata/:nisn' element={<FormRegister/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -18,12 +18,6 @@ export const Register = () => {
     return false
   }
 
-  
-  
-  const verifikasi=()=>{
-    navigate('/verifikasiEmail')
-  }
-
   const navigate = useNavigate();
   const { register, resetField, handleSubmit } = useForm();
   const dispatch = useDispatch();
@@ -44,29 +38,15 @@ export const Register = () => {
   
 
   const cekNisn =(data)=>{
-    // console.log(nisn)
-    setisCheckNisn(true)
-    // setnisn(data.nisn)
+    setisCheckNisn(true)    
     dispatch(getNisn(data.nisn));
     
   }
   useEffect(() => {
-    
-    // console.log(nisn)
-
     if (isCheckNisn) {
-      // cekNisn();
       if (getNisnResult) {
-        setBiodata({
-          nisn: getNisnResult.data.nisn,
-          nama: getNisnResult.data.nama,
-          jk: getNisnResult.data.jk,
-          agama: getNisnResult.data.agama,
-          tanggal_lahir: getNisnResult.data.tanggal_lahir,
-          email: getNisnResult.data.email,
-          wa: getNisnResult.data.wa
-        }
-        );
+        // console.log(
+        navigate(`/registerBiodata/${getNisnResult.data.nisn}`)
         setValidNisn(true);
         Swal.fire({
           title: "Data Siswa Ditemukan",
@@ -121,12 +101,7 @@ export const Register = () => {
           </div>
         </div>
 
-      <FormRegister
-      Biodata = {Biodata}
-      setBiodata = {setBiodata}
-      ValidNisn = {ValidNisn}
-      
-      />
+
      
       </div>
     </div>
