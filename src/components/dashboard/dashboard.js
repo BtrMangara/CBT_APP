@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import DummyImage from './img/image1.jpg'
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
-import { getBerita } from '../../actions/userAction';
+import { getBerita, getPengumuman } from '../../actions/userAction';
 import parse from 'html-react-parser'
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -10,16 +10,25 @@ export const Dashboard = () => {
 
   const {getBeritaResult,getBeritaLoading,getBeritaError} = useSelector(
     (state)=>state.ContentReducers);
-  const [Content, setContent] = useState({
+  const {getPengumumanResult,getPengumumanLoading,getPengumumanError} = useSelector(
+    (state)=>state.ContentReducers);
+  
+    const [ContentBerita, setContentBerita] = useState({
     page_size:10,
     page_number:1,
     search:'',
-  })
+    })
 
+    const [ContentPengumuman, setContentPengumuman] = useState({
+      page_size:10,
+      page_number:1,
+      search:'',
+    })
 
 
   useEffect(() => {
-    dispatch(getBerita(Content))
+    dispatch(getBerita(ContentBerita))
+    dispatch(getPengumuman(ContentPengumuman))
    
   }, [dispatch])
   
@@ -60,17 +69,24 @@ export const Dashboard = () => {
                     return(
                       
                     <div className='col-4 d-flex justify-content-center'>
-                      <div className="card border border-0" style={{ width: "18rem;" }}>
-                        <img src={berita.photo === null? "https://placehold.co/400" :berita.photo.gambar} className="mx-auto card-img-top border border-0 img-fluid w-100 h-100 object-fit-cover mt-2" 
-                        style={{ maxWidth:'200px',maxHeight:'130px' }} alt="..."/>
-                        <div className="card-body border border-0">
+                      <div className="card border border-0 " style={{ width: "18rem;", height:'25rem'}}>
+                        <img src={berita.photo === null? "https://placehold.co/400" :berita.photo.gambar} 
+                          className="mx-auto card-img-top border border-0 img-fluid mt-2 object-fit-cover" 
+                          style={{ width:'17rem',height:'12rem',maxWidth:'18rem',maxHeight:'12rem' }} alt="..."
+                        />
+                        <div className="card-body border border-0 m-0">
                           <h5 className="card-title">{berita.judul}</h5>
                             <div className='card-text'>
                               {parse(berita.isi)}
                             </div>
-                          
-                          {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
                         </div>
+                        <div className='card-footer bg-white border-top'>
+                          <div style={{borderLeft: '7px solid red' }}>
+                            <small className='fw-medium ms-2'>
+                            {parse(berita.kategori)}
+                            </small>
+                          </div>
+                            </div>
                       </div>
                     </div>    
                     )
@@ -82,9 +98,6 @@ export const Dashboard = () => {
                   <h1>Error</h1>
                 ) 
               }
-              
-              
-
 
             </div>
 
@@ -111,64 +124,38 @@ export const Dashboard = () => {
 
           <div className='col-4 rounded ps-5 rounded-2 gx-4 overflow-y-auto' style={{ height:'30rem' }} >
             <div className='row bg-light rounded row-gap-3 justify-content-center '>
-              <div className='col-12'>
-                <div className='row align-items-center'>
-                  <div className='col-8'>
-                    <div class="card g-0 m-0 border border-0 bg-light">
-                      <div class="card-body">
-                        <span className='fs-2'>#1</span>
-                        <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
+
+              {
+                getPengumumanResult?(
+                  getPengumumanResult.map((pengumuman,index)=>{
+                    return(
+                      <div className='col-12'>
+                      <div className='row align-items-center'>
+                        <div className='col-8'>
+                          <div class="card g-0 m-0 border border-0 bg-light">
+                            <div class="card-body">
+                              <span className='fs-2'>#{index+1}</span>
+                              <h5 class="card-title">{pengumuman.judul}</h5>
+                              <h6 class="card-subtitle mb-2 text-body-secondary">{parse(pengumuman.isi)}</h6>
+                              <h6 class="card-subtitle mb-2 text-body-secondary fw-bolder">{pengumuman.kategori}</h6>
+                            </div>
+                          </div>
+                        </div>
+      
+                        <div className='col-4'>
+                          <img src={pengumuman.photo === null ? "https://placehold.co/400" : pengumuman.photo} className='img-fluid'></img>
+                        </div>
+      
                       </div>
                     </div>
-                  </div>
-
-                  <div className='col-4'>
-                    <img src="https://placehold.co/400" className='img-fluid'></img>
-                  </div>
-                </div>
-              </div>
-
-              <div className='col-12'>
-                <div className='row align-items-center'>
-                  <div className='col-8'>
-                    <div class="card g-0 m-0 border border-0 bg-light">
-                      <div class="card-body">
-                        <span className='fs-2'>#1</span>
-                        <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='col-4'>
-                    <img src="https://placehold.co/400" className='img-fluid'></img>
-                  </div>
-                </div>
-                
-              </div>
-              
-              <div className='col-12'>
-                <div className='row align-items-center'>
-                  <div className='col-8'>
-                    <div class="card g-0 m-0 border border-0 bg-light">
-                      <div class="card-body">
-                        <span className='fs-2'>#1</span>
-                        <h5 class="card-title">Shin Tae-yong Akui Sulit Baru Pertama Kali Lawan Negara Sendiri</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Kumparan News</h6>
-                        {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
-                        {/* <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a> */}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='col-4'>
-                    <img src="https://placehold.co/400" className='img-fluid'></img>
-                  </div>
-                </div>
-                
-              </div>
+                    )
+                  }
+                )
+                ):getPengumumanLoading?(
+                  <h1>Loading...</h1>
+                ):
+                <h1>Error</h1>
+              }
              
             </div>
           </div>         

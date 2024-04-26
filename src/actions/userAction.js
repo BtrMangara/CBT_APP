@@ -6,6 +6,7 @@ const URL_API = process.env.REACT_APP_API_KEY;
 export const GET_LOGIN = 'GET_LOGIN';
 export const GET_NISN = 'GET_NISN';
 export const GET_BERITA = 'GET_BERITA';
+export const GET_PENGUMUMAN = 'GET_PENGUMUMAN';
 
 export const getLogin=(nisn)=>{
     return async(dispatch)=>{
@@ -117,7 +118,7 @@ export const getBerita = (data)=>{
             timeout:12000
         })
         .then((response)=>{
-            console.log(response.data.data)
+            // console.log(response.data.data)
             dispatch({
                 type:GET_BERITA,
                 payload:{
@@ -138,6 +139,52 @@ export const getBerita = (data)=>{
                 }
             })
         })
+
+    }
+}
+
+export const getPengumuman = (data)=>{
+    // console.log(data)
+    return async(dispatch)=>{
+        //loading
+
+        dispatch({
+            type:GET_BERITA,
+            payload:{
+                loading:true,
+                data:false,
+                errorMessage:false,
+            }
+        })
+        
+        await axios({
+            method:'GET',
+            url:`${URL_API}pengumuman?page_size=${data.page_size}&page_number=${data.page_number}&search=${data.search} `,
+            timeout:12000
+        })
+        .then((response)=>{
+            console.log(response.data.data)
+            dispatch({
+                type:GET_PENGUMUMAN,
+                payload:{
+                    loading:false,
+                    data:response.data.data,
+                    errorMessage:false,
+                }
+            })
+        })
+        .catch((error)=>{
+            
+            dispatch({
+                type:GET_BERITA,
+                payload:{
+                    loading:false,
+                    data:false,
+                    errorMessage:error,
+                }
+            })
+        })
+
 
     }
 }
