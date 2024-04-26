@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import DummyImage from './img/image1.jpg'
 import { FaMagnifyingGlass } from "react-icons/fa6";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getBerita } from '../../actions/userAction';
+import parse from 'html-react-parser'
 export const Dashboard = () => {
+  const dispatch = useDispatch();
+
+
+  const {getBeritaResult,getBeritaLoading,getBeritaError} = useSelector(
+    (state)=>state.ContentReducers);
+  const [Content, setContent] = useState({
+    page_size:10,
+    page_number:1,
+    search:'',
+  })
+
+
+
+  useEffect(() => {
+    dispatch(getBerita(Content))
+   
+  }, [dispatch])
+  
   return (
     <div className='dashboard'>
       <div className="container mt-4">
@@ -32,50 +52,40 @@ export const Dashboard = () => {
                   type="text" placeholder="Search" aria-label="default input example"/>
                 </div>
               </div>
-              <div className='col-4'>
-                <div className="card border border-0" style={{ width: "18rem;" }}>
-                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
-                  <div className="card-body border border-0">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                  </div>
-                </div>
-              </div>
-              
-              <div className='col-4 '>
-                <div className="card border border-0" style={{ width: "18rem;" }}>
-                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
-                  <div className="card-body border border-0">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                  </div>
-                </div>
-              </div>
 
-              <div className='col-4 '>
-                <div className="card border border-0" style={{ width: "18rem;" }}>
-                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
-                  <div className="card-body border border-0">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                  </div>
-                </div>
-              </div>
               
-              <div className='col-4 '>
-                <div className="card border border-0" style={{ width: "18rem;" }}>
-                  <img src="https://placehold.co/400" className="card-img-top border border-3" alt="..."/>
-                  <div className="card-body border border-0">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                  </div>
-                </div>
-              </div>
+              {
+                getBeritaResult ?(
+                  getBeritaResult.map((berita)=>{
+                    return(
+                      
+                    <div className='col-4 d-flex justify-content-center'>
+                      <div className="card border border-0" style={{ width: "18rem;" }}>
+                        <img src={berita.photo === null? "https://placehold.co/400" :berita.photo.gambar} className="mx-auto card-img-top border border-0 img-fluid w-100 h-100 object-fit-cover mt-2" 
+                        style={{ maxWidth:'200px',maxHeight:'130px' }} alt="..."/>
+                        <div className="card-body border border-0">
+                          <h5 className="card-title">{berita.judul}</h5>
+                            <div className='card-text'>
+                              {parse(berita.isi)}
+                            </div>
+                          
+                          {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+                        </div>
+                      </div>
+                    </div>    
+                    )
+                  }
+                )
+                ):getBeritaLoading?(
+                  <h1>Loading...</h1>
+                ):(
+                  <h1>Error</h1>
+                ) 
+              }
               
+              
+
+
             </div>
 
             <div className='col-12 d-flex justify-content-end rounded'>

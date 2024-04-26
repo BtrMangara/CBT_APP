@@ -5,6 +5,7 @@ const URL_API = process.env.REACT_APP_API_KEY;
 
 export const GET_LOGIN = 'GET_LOGIN';
 export const GET_NISN = 'GET_NISN';
+export const GET_BERITA = 'GET_BERITA';
 
 export const getLogin=(nisn)=>{
     return async(dispatch)=>{
@@ -85,6 +86,51 @@ export const getNisn=(data)=>{
             // console.log(error.response.data.message)
             dispatch({
                 type:GET_NISN,
+                payload:{
+                    loading:false,
+                    data:false,
+                    errorMessage:error.response.data,
+                }
+            })
+        })
+
+    }
+}
+
+export const getBerita = (data)=>{
+    // console.log(data)
+    return async(dispatch)=>{
+        //loading
+
+        dispatch({
+            type:GET_BERITA,
+            payload:{
+                loading:true,
+                data:false,
+                errorMessage:false,
+            }
+        })
+
+        await axios({
+            method:'GET',
+            url:`${URL_API}berita?page_size=${data.page_size}&page_number=${data.page_number}&search=${data.search} `,
+            timeout:12000
+        })
+        .then((response)=>{
+            console.log(response.data.data)
+            dispatch({
+                type:GET_BERITA,
+                payload:{
+                    loading:false,
+                    data:response.data.data,
+                    errorMessage:false,
+                }
+            })
+        })
+        .catch((error)=>{
+            // console.log(error.response.data.message)
+            dispatch({
+                type:GET_BERITA,
                 payload:{
                     loading:false,
                     data:false,
