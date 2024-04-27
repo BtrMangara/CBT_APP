@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import './css/index.css'
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
@@ -22,7 +23,8 @@ const FormRegister = () => {
         .oneOf([Yup.ref('password')],'Password Tidak Sesuai')
     })
 
-    const {id} = useParams();
+    const {nisn} = useParams();
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {
@@ -42,7 +44,7 @@ const FormRegister = () => {
     const [Eye, setEye] = useState(false);
     const [isRegister, setisRegister] = useState(false)
 
-    const {getNisnResult,getNisnLoading,getNisnError} = useSelector(
+    const {getNisnResult} = useSelector(
         (state)=>state.UserReducers);
     
     const [Biodata, setBiodata] = useState({
@@ -68,17 +70,15 @@ const FormRegister = () => {
     }
     
     const registrasi=(data)=>{
-
         if (data.password==data.cpassword) {
-            setBiodata({...Biodata,password:data.cpassword})
-            dispatch(registerSiswa(Biodata))
-            setisRegister(true)
+            setBiodata({...Biodata,password:data.cpassword})          
+            setisRegister(true)          
         }
       }
 
       useEffect(() => {
-
-        dispatch(getNisn(id))
+          //   console.log(id)
+          dispatch(getNisn(nisn))
         if (getNisnResult.data) {
             setBiodata(getNisnResult.data)
         }
@@ -86,6 +86,7 @@ const FormRegister = () => {
             navigate('/register')   
         }
         if (isRegister) {
+            dispatch(registerSiswa(Biodata))
             Swal.fire({
                 title: `Berhasil Daftar, Verifikasi Sudah Dikirim Ke Email ${Biodata.email}` ,
                 text: "Silahkan Verifikasi Akun Terlebih Dahulu",
@@ -96,9 +97,11 @@ const FormRegister = () => {
               .then(()=>{
                 navigate('/verifikasiEmail')
               })
+            setisRegister(false)
         }
+       
 
-    }, [dispatch])
+    }, [isRegister,dispatch])
   return (
     <div className='Dash d-flex justify-content-center align-items-center'>
     <div className="Register row border border-1 shadow shadow-sm p-0 g-0 align-items-center">
@@ -113,7 +116,7 @@ const FormRegister = () => {
           <div className='col-12'>  
           
              
-        <form className='needs-validation' noValidate onSubmit={handleSubmit(registrasi)}>
+       
                 <div className={`row mb-3 p-0 gx-3 gy-0 m-0 px-4 `}>
                   
                     <div className='col-12'>
@@ -128,7 +131,7 @@ const FormRegister = () => {
                         onkeydown="return false" onwheel="return false"
                         disabled readonly
                         value={Biodata.nisn}
-                        
+                        onChange={(e)=>setBiodata({...Biodata,nisn:e.target.value})}
                         /> 
                         </div>
                     </div>
@@ -211,14 +214,14 @@ const FormRegister = () => {
                     onkeydown='return false'
                     onwheel='return false'
                     value={Biodata.wa}
-                    onChange={(e)=>setBiodata({...Biodata,wa:e.target.value})}
+                    {...register('nisn')}
                     />
                     </div>
                 </div>
                 
                 <div className='col-6 '>
                 <span>Password</span>
-                    <div className="input-group mb-3">
+                    <div className="input-group">
                     <input
                     required
                     className={`form-control form-control-sm shadow-none ${EyeConfirm === true ? '' :'fw-bold border'} border-0`} 
@@ -231,7 +234,7 @@ const FormRegister = () => {
                         {EyeConfirm === true ? <FaRegEye/> :<FaRegEyeSlash/> }
                     </button>
                     </div>
-                    <p className='mb-2 text-danger'>{errors.password?.message}</p>
+                    <p className='g-0 text-danger fw-medium' style={{ fontSize:'12px' }}>{errors.password?.message}</p>
                 </div>
                 <div className='col-6 '>
                     <span>Konfirmasi Password</span>
@@ -246,7 +249,7 @@ const FormRegister = () => {
                         {Eye === true ? <FaRegEye/> :<FaRegEyeSlash/> }
                     </button>
                     </div>
-                    <p className='mb-2 text-danger'>{errors.cpassword?.message}</p>
+                    <p className='g-0 text-danger fw-medium' style={{ fontSize:'12px' }}>{errors.cpassword?.message}</p>
                 </div>
                 {/* <div className='col-6 '>
                     <span>Password</span>
@@ -260,11 +263,12 @@ const FormRegister = () => {
                     </div>
                 </div> */}
                     <div className='col-12'>
+                    <form className='needs-validation' noValidate onSubmit={handleSubmit(registrasi)}>
                         <button className='btn btn-info w-100 text-light' type='submit'>Submit</button>
+                    </form>
                     </div>
                 
                 </div>
-                </form>
             
     
           </div>

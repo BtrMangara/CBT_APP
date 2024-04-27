@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNisn } from '../../actions/userAction';
 import Swal from 'sweetalert2';
-import FormRegister from './formRegister';
 
 export const Register = () => {
   const {getNisnResult,getNisnLoading,getNisnError} = useSelector(
@@ -25,21 +24,15 @@ export const Register = () => {
  
   const [ValidNisn, setValidNisn] = useState(false)
   const [isCheckNisn, setisCheckNisn] = useState(false)
-  const [Biodata, setBiodata] = useState({
-        nisn: '',
-        nama: '',
-        jk: '',
-        agama: '',
-        tanggal_lahir:'',
-        email:'',
-        wa:''
-  })
-
+  // const [Nisn, setNisn] = useState('')
   
 
   const cekNisn =(data)=>{
-    setisCheckNisn(true)    
+    // console.log(data)
+    setisCheckNisn(true) 
     dispatch(getNisn(data.nisn));
+    // setNisn(data.nisn)
+    // console.log(data.nisn)
     
   }
   useEffect(() => {
@@ -68,7 +61,7 @@ export const Register = () => {
       }
     }
 
-  }, [getNisnResult,getNisnLoading,getNisnError])
+  }, [getNisnResult,getNisnError])
 
   return (
     <div className='Dash d-flex justify-content-center align-items-center'>

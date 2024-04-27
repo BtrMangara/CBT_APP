@@ -7,8 +7,8 @@ export const GET_LOGIN = 'GET_LOGIN';
 export const GET_NISN = 'GET_NISN';
 export const GET_BERITA = 'GET_BERITA';
 export const GET_PENGUMUMAN = 'GET_PENGUMUMAN';
-export const REGISTER_SISWA = 'REGISTER_SISWA'
-
+export const REGISTER_SISWA = 'REGISTER_SISWA';
+export const VERIFIKASI_EMAIL = 'VERIFIKASI_EMAIL';
 
 export const getLogin=(nisn)=>{
     return async(dispatch)=>{
@@ -30,7 +30,7 @@ export const getLogin=(nisn)=>{
         })
         .then((response)=>{
             
-            console.log(response)
+            // console.log(response)
             dispatch({
                 type:GET_LOGIN,
                 payload:{
@@ -56,7 +56,7 @@ export const getLogin=(nisn)=>{
 }
 
 export const getNisn=(data)=>{
-    // console.log(data.nisn)
+    // console.log(data)
     return async(dispatch)=>{
         //loading
 
@@ -165,7 +165,7 @@ export const getPengumuman = (data)=>{
             timeout:12000
         })
         .then((response)=>{
-            console.log(response.data.data)
+            // console.log(response.data.data)
             dispatch({
                 type:GET_PENGUMUMAN,
                 payload:{
@@ -192,12 +192,12 @@ export const getPengumuman = (data)=>{
 }
 
 export const registerSiswa = (data)=>{
-    console.log(data)
+    // console.log(data)
     return async(dispatch)=>{
         dispatch({
             type:REGISTER_SISWA,
             payload:{
-                loading:false,
+                loading:true,
                 data:false,
                 errorMessage:false,
             }
@@ -231,4 +231,43 @@ export const registerSiswa = (data)=>{
     }
 }
 
-
+export const verifikasiEmail = (data)=>{
+    // console.log(data)
+    return async(dispatch)=>{
+        dispatch({
+            type:VERIFIKASI_EMAIL,
+            payload:{
+                loading:true,
+                data:false,
+                errorMessage:false,
+            }
+        })
+        await axios({
+            method:'GET',
+            url:`${URL_API}verifikasi_email?token=${data.token}&nisn=${data.nisn}`,
+            timeout:1200
+        })
+        .then((response)=>{
+            // console.log(response.data.message)
+            dispatch({
+                type:VERIFIKASI_EMAIL,
+                payload:{
+                    loading:false,
+                    data:response.data,
+                    errorMessage:false,
+                }
+            })
+        })
+        .catch((error)=>{
+            // console.log(error.response.data.message)
+            dispatch({
+                type:VERIFIKASI_EMAIL,
+                payload:{
+                    loading:false,
+                    data:false,
+                    errorMessage:error.response.data,
+                }
+            })
+        })
+    }
+}
