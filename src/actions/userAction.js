@@ -9,11 +9,13 @@ export const GET_BERITA = 'GET_BERITA';
 export const GET_PENGUMUMAN = 'GET_PENGUMUMAN';
 export const REGISTER_SISWA = 'REGISTER_SISWA';
 export const VERIFIKASI_EMAIL = 'VERIFIKASI_EMAIL';
+export const GET_BIODATA = 'GET_BIODATA';
 
-export const getLogin=(nisn)=>{
+
+export const getLogin=(data)=>{
+    // console.log(data)
     return async(dispatch)=>{
         //loading
-
         dispatch({
             type:GET_LOGIN,
             payload:{
@@ -24,12 +26,12 @@ export const getLogin=(nisn)=>{
         })
 
         await axios({
-            method:'GET',
-            url:`${URL_API}nisn?nisn=${nisn}`,
+            method:'POST',
+            url:`${URL_API}login`,
+            data:data,
             timeout:12000
         })
         .then((response)=>{
-            
             // console.log(response)
             dispatch({
                 type:GET_LOGIN,
@@ -41,13 +43,13 @@ export const getLogin=(nisn)=>{
             })
         })
         .catch((error)=>{
-            console.log(`${process.env.URL_API}`)
+            // console.log(error)
             dispatch({
                 type:GET_LOGIN,
                 payload:{
                     loading:false,
                     data:false,
-                    errorMessage:error.message,
+                    errorMessage:error.response,
                 }
             })
         })
@@ -237,7 +239,7 @@ export const verifikasiEmail = (data)=>{
         dispatch({
             type:VERIFIKASI_EMAIL,
             payload:{
-                loading:true,
+                loading:false,
                 data:false,
                 errorMessage:false,
             }
@@ -248,7 +250,7 @@ export const verifikasiEmail = (data)=>{
             timeout:1200
         })
         .then((response)=>{
-            // console.log(response.data.message)
+            // console.log(response)
             dispatch({
                 type:VERIFIKASI_EMAIL,
                 payload:{
@@ -259,13 +261,55 @@ export const verifikasiEmail = (data)=>{
             })
         })
         .catch((error)=>{
-            // console.log(error.response.data.message)
+            // console.log(error.response)
             dispatch({
                 type:VERIFIKASI_EMAIL,
                 payload:{
                     loading:false,
                     data:false,
-                    errorMessage:error.response.data,
+                    errorMessage:error.response,
+                }
+            })
+        })
+    }
+}
+
+
+export const getBiodata = (data)=>{
+    return async (dispatch)=>{
+        dispatch({
+            type:GET_BIODATA,
+            payload:{
+                loading:false,
+                data:false,
+                errorMessage:false,
+            }
+        })
+        await axios({
+            method:'GET',
+            url:`${URL_API}biodata`,
+            headers:{
+                'Authorization': 'Bearer ' + data
+            },
+            timeout:12000
+        })
+        .then((response)=>{
+            dispatch({
+                type:GET_BIODATA,
+                payload:{
+                    loading:false,
+                    data:response.data,
+                    errorMessage:false,
+                }
+            })
+        })
+        .catch((error)=>{
+            dispatch({
+                type:GET_BIODATA,
+                payload:{
+                    loading:false,
+                    data:false,
+                    errorMessage:error.response,
                 }
             })
         })

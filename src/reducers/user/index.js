@@ -1,4 +1,4 @@
-import { GET_LOGIN, GET_NISN, REGISTER_SISWA, VERIFIKASI_EMAIL } from "../../actions/userAction";
+import { GET_BIODATA, GET_LOGIN, GET_NISN, REGISTER_SISWA, VERIFIKASI_EMAIL } from "../../actions/userAction";
 
 const initialState={
     getLoginResult : false,
@@ -16,6 +16,10 @@ const initialState={
     getVerifikasiEmailResult:false,
     getVerifikasiEmailLoading:false,
     getVerifikasiEmailError:false,
+
+    getBiodataResult:false,
+    getBiodataLoading:false,
+    getBiodataError:false,
 }
 
 const user = (state = initialState,action)=>{
@@ -43,7 +47,7 @@ const user = (state = initialState,action)=>{
                 getRegistrasiSiswaError:action.payload.errorMessage,
             }
         case VERIFIKASI_EMAIL:
-            console.log(VERIFIKASI_EMAIL,action)
+            // console.log(VERIFIKASI_EMAIL,action)
             return{
                 ...state,
                 getVerifikasiEmailResult:action.payload.data,
@@ -51,6 +55,13 @@ const user = (state = initialState,action)=>{
                 getVerifikasiEmailError:action.payload.errorMessage,
             }
 
+        case GET_BIODATA :
+            return{
+                ...state,
+                getBiodataResult:action.payload.data,
+                getBiodataLoading:action.payload.Loading,
+                getBiodataError:action.payload.errorMessage,
+            }
         default:
             return state;
     }

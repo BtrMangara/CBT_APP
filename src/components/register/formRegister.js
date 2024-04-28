@@ -81,6 +81,8 @@ const FormRegister = () => {
           dispatch(getNisn(nisn))
         if (getNisnResult.data) {
             setBiodata(getNisnResult.data)
+            console.log(getNisnResult)
+            console.log(getNisnResult.data)
         }
         else{
             navigate('/register')   

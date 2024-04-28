@@ -8,6 +8,8 @@ import { Login } from './components/login/login';
 import { Register } from "./components/register/register";
 import Verifikasi from "./components/verifikasi/verifikasi";
 import FormRegister from "./components/register/formRegister";
+import Profile from "./components/profile/profile";
+import ProtectedRoute from "./helpers/protectedRoute";
 
 
 
@@ -20,7 +22,11 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/verifikasiEmail' element={<Verifikasi/>}/>
-        
+        <Route path='/profile' element={
+              <ProtectedRoute>
+              <Profile/>
+              </ProtectedRoute>
+        }/>
         <Route path='/registerBiodata/:nisn' element={<FormRegister/>}/>
       </Routes>
     </BrowserRouter>

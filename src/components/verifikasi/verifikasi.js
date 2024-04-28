@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { verifikasiEmail } from '../../actions/userAction';
+import Swal from 'sweetalert2';
 
 
 const Verifikasi = () => {
@@ -21,10 +22,10 @@ const Verifikasi = () => {
   } = useForm();
 
   const [IsSubmit, setIsSubmit] = useState(false)
-  // const [Verifikasi, setVerifikasi] = useState({
-  //   nisn:'',
-  //   token:''
-  // })
+  const [Verifikasi, setVerifikasi] = useState({
+    nisn:'',
+    token:''
+  })
   
   const navigate = useNavigate();
 
@@ -34,29 +35,48 @@ const Verifikasi = () => {
 
   const pindahHalaman = (data) =>{
       setIsSubmit(true)
+      setVerifikasi(data)
       dispatch(verifikasiEmail(data))
-      // console.log(data)
+      // console.log(Verifikasi)
+      // console.log(getVerifikasiEmailResult)
     }
-
+    
     useEffect(() => {
       if (IsSubmit) {
-        setIsSubmit(false)
-        if (!getVerifikasiEmailResult) {
-          console.log('first')
+        
+        if (getVerifikasiEmailResult.data) {
+          Swal.fire({
+            title: "Akun Anda Telah Aktif!",
+            text: "Silahkan Login!",
+            icon: "success",
+            showConfirmButton:false,
+            timer:1000
+          })
+          .then(()=>{
+            navigate('/login')
+          })
+        }else if(getVerifikasiEmailError.data){
+          // console.log(getVerifikasiEmailError)
+          Swal.fire({
+            title: `${getVerifikasiEmailError.data.message}`,
+            text: "Silahkan Cek Kembali",
+            icon: "error",
+            showConfirmButton:false,
+            timer:1000
+          });
         }
-      // console.log(getVerifikasiEmailResult.data)
-      // console.log(getVerifikasiEmailError)
     }
 
-  }, [IsSubmit,console.log(getVerifikasiEmailResult)])
+  }, [IsSubmit,getVerifikasiEmailResult,getVerifikasiEmailError,dispatch])
   return (
     <div className='Dash d-flex justify-content-center align-items-center'>
+      <form onSubmit={handleSubmit(pindahHalaman)}>
       <div className="Login row border border-1 shadow shadow-sm justify-content-center" >
         <div className='col-12 d-flex justify-content-center mt-2 '>
         <img src={Logo} className="w-50 img-fluid" alt="..."/>
         </div>
         <div className='col-10 object-fit-cover text-center mb-3 mt-3'>
-          <h3>Silahkan Login Terlebih Dahulu</h3>
+          <h5>Silahkan Verifikasi Email Anda Terlebih Dahulu</h5>
         </div>
         
           
@@ -91,9 +111,9 @@ const Verifikasi = () => {
           </div>
 
           <div className='col-10 ms-3 mb-3'>
-            <form onSubmit={handleSubmit(pindahHalaman)}>
-              <button className='btn btn-dark w-100'>Verifikasi Email</button>
-            </form>
+            
+              <button className='btn btn-dark w-100' type='submit'>Verifikasi Email</button>
+            
           </div>
          
           {/* <div className='col-10 ms-3 mb-3 text-center'>  
@@ -102,6 +122,7 @@ const Verifikasi = () => {
          
         
         </div>
+        </form>
     </div>
   )
 }

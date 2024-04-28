@@ -1,23 +1,62 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './css/login.css'
 import Logo from '../dashboard/img/twh.webp'
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getLogin } from '../../actions/userAction';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import * as Yup from "yup";
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 export const Login = () => {
 
-  const dispatch = useDispatch();
-  
-  const nisn = `0026061643`;
+  const formSchema = Yup.object().shape({
+    password: Yup.string()
+    .min(6,"Password Harus Lebih Dari 6 Karakter"),
+})
 
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    register,
+    resetField,
+    handleSubmit,
+    watch,
+    formState:{errors}
+ } = useForm({
+    mode:'onTouched',
+    resolver: yupResolver(formSchema)
+ });
+  
+  const [ShowPassword, setShowPassword] = useState(false)
+
+  const seePassword = ()=>{
+    setShowPassword(!ShowPassword)
+  }
+
+  const {getLoginResult,getLoginLoading,getLoginError} = useSelector(
+    (state)=>state.UserReducers);
+
+  const Login = (data)=>{
+    dispatch(getLogin(data))
+  }
   useEffect(() => {
-    dispatch(getLogin(nisn))
-  }, [dispatch])
+    if(getLoginResult.data){
+      Cookies.set('token', getLoginResult.data.token);
+      navigate('/profile')
+    }else if(getLoginError.data){
+      alert(getLoginError.data.message)
+    }
+
+  }, [getLoginError,getLoginResult])
 
   return (
     <div className='Dash d-flex justify-content-center align-items-center'>
+      
       <div className="Login row border border-1 shadow shadow-sm justify-content-center" >
         <div className='col-12 d-flex justify-content-center mt-2 '>
         <img src={Logo} className="w-50 img-fluid" alt="..."/>
@@ -35,6 +74,7 @@ export const Login = () => {
                       id="nisn" 
                       placeholder="Masukkan Nisn Anda"
                       onkeydown="return false" onwheel="return false"
+                      {...register('username')}
                       /> 
                 <label >Masukkan Nisn Anda</label>  
               </div>
@@ -46,14 +86,25 @@ export const Login = () => {
             <div className="input-group">
               <span className='input-group-text mb-3 '><FaLock/></span>
               <div className="form-floating mb-3">
-                <input type="password" className="form-control shadow-none border border-start-0 fw-bold" id="password" placeholder="name@example.com"/> 
-                <label >Masukkan Password Anda</label>  
+                <input type={`${ShowPassword == true ? 'text': 'password'}`} 
+                className={`form-control shadow-none border border-start-0 ${ShowPassword == true ?  '' :'fw-bold'} `} 
+                id="password" 
+                placeholder="name@example.com"
+                {...register('password')}
+                /> 
+                <label >Masukkan Password Anda</label> 
               </div>  
+              <button className="input-group-text shadow-sm border border-0 mb-3" onClick={seePassword}>
+                {ShowPassword == true ?<FaRegEye/> : <FaRegEyeSlash/> }
+              </button>
             </div>
+            <p className='g-0 text-danger fw-medium' style={{ fontSize:'12px' }}>{errors.password?.message}</p>
           </div>
 
-          <div className='col-10 ms-3 mb-3'>  
-            <button className='btn btn-dark w-100'>Login</button>
+          <div className='col-10 ms-3 mb-3'>
+          <form onSubmit={handleSubmit(Login)}>
+            <button className='btn btn-dark w-100' type='submit'>Login</button>
+          </form>
           </div>
          
           <div className='col-10 ms-3 mb-3 text-center'>  
@@ -61,7 +112,8 @@ export const Login = () => {
           </div>
          
         
-        </div>
+      </div>
+      
     </div>
 
 
