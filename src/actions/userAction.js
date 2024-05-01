@@ -24,7 +24,7 @@ export const getLogin=(data)=>{
                 errorMessage:false,
             }
         })
-
+        
         await axios({
             method:'POST',
             url:`${URL_API}login`,
@@ -276,6 +276,7 @@ export const verifikasiEmail = (data)=>{
 
 
 export const getBiodata = (data)=>{
+    console.log(data)
     return async (dispatch)=>{
         dispatch({
             type:GET_BIODATA,

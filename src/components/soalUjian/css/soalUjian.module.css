@@ -1,0 +1,25 @@
+.main{
+    background-color: #DFF5FF;
+    background-size: cover;
+    width: 100%;
+    min-height: 88vh;
+    overflow-y: auto;
+    position: absolute
+}
+
+.noUjian{
+    height: 60vh;
+}
+
+.pilihan{
+    height: 30vh;
+    /* width: 115vh; */
+}
+.textnama{
+    background-color: rgb(255, 255, 255,0.5);
+    border-top: 10px none #ff6550;
+    border-bottom: 3px solid #67c6e3;
+}
+.navmain{
+    background-color: #67C6E3;
+}

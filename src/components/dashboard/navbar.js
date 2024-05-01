@@ -19,11 +19,14 @@ export const Navbar = () => {
 
     
     useEffect(() => {
-    dispatch(getBiodata(token))
-    if (getBiodataResult.data) {
-      setStatus(true)
-    }
-    }, [Status,dispatch])
+      if (token) {
+        dispatch(getBiodata(token))
+        setStatus(true)
+      }
+    // if (getBiodataResult.data) {
+    //   setStatus(true)
+    // }
+    }, [Status,dispatch,token])
 
 
   return (
@@ -55,15 +58,15 @@ export const Navbar = () => {
                 </ul>
                  :
                  <ul className="dropdown-menu dropdown-menu-end me-3 border-0 ">
-                  <Link to='/login' className="dropdown-item" href="login">Hello</Link>
-                  <li><a className="dropdown-item" href="/register">Kawwan</a></li>
+                  <Link to='/profile/myAccount' className="dropdown-item">My Account</Link>
+                  <li><a className="dropdown-item">Logout</a></li>
                 </ul>
                  }
               </div>
               </div>
             </div>
           </div>
-        </nav>
+      </nav>
 
       <div>
       <Dashboard/>
