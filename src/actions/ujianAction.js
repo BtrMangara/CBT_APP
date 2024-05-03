@@ -50,7 +50,7 @@ export const getDaftarUjian = (data)=>{
 }
 
 export const getSoalUjian = (data)=>{
-    console.log(data)
+    // console.log(data)
     return async (dispatch)=>{
         dispatch({
             type:GET_SOAL_UJIAN,
@@ -69,6 +69,7 @@ export const getSoalUjian = (data)=>{
             timeout:12000
         })
         .then((response)=>{
+            // console.log(response.data)
             dispatch({
                 type:GET_SOAL_UJIAN,
                 payload:{
@@ -79,6 +80,7 @@ export const getSoalUjian = (data)=>{
             })
         })
         .catch((error)=>{
+            console.log(error)
             dispatch({
                 type:GET_SOAL_UJIAN,
                 payload:{
