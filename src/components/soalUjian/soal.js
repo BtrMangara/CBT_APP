@@ -40,9 +40,11 @@ const Soal = (props) => {
                                 return(
                                     <div className='d-flex align-items-center g-0 m-0'>
                                         
-                                        <input class="form-check-input border-black border-2 ms-1" type="radio" name="flexRadioDefault" 
+                                        <input class="form-check-input border-black border-2 ms-1 rounded-5" type="checkbox" name="flexRadioDefault" 
                                         id={jawaban.id} 
-                                        value={jawaban.value}/>
+                                        value={jawaban.value}
+                                         style={{ appearance:'none', WebkitAppearance:'none' }}
+                                        />
                                         <label class="form-check-label ms-3 fw-bolder w-100 mt-3" for={jawaban.id}>
                                             {parse(jawaban.label)}
                                         </label>

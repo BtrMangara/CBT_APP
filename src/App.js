@@ -15,6 +15,8 @@ import NotFound from "./helpers/notFound";
 import MyAccount from "./components/Account/myAccount";
 import Percobaan from "./components/percobaan/percobaan";
 import SoalUjian from "./components/soalUjian/soalUjian";
+import Berita from "./components/Berita/berita";
+import { Dashboard } from "./components/dashboard/dashboard";
 
 
 
@@ -23,10 +25,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Navbar/>}/>
+        <Route path='/' element={<Navbar/>}>
+        <Route path='/' index element={ <Dashboard/>}/>
+        <Route path='/berita' element={ <Berita/>}/>
+        {/* <Route path='/berita' element={ <Berita/>}/> */}
+        </Route>
+
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/verifikasiEmail' element={<Verifikasi/>}/>
+        
+        
         <Route path='/profile' element={ 
         <ProtectedRoute>
         <NavbarProfile/>
@@ -36,6 +45,7 @@ function App() {
           <Route path='/profile/' index element={ <Profile/>}/>
           <Route path='/profile/myAccount' element={ <MyAccount/>}/>
           <Route path='/profile/percobaan' element={ <Percobaan/>}/>
+          {/* <Route path='/berita' element={<Berita/>}/> */}
           <Route path="/profile/*" element={<NotFound/>}/>
           
         </Route>

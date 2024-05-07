@@ -23,3 +23,38 @@
 .navmain{
     background-color: #67C6E3;
 }
+
+/* input[type="checkbox"] {
+    width: 3em;
+    height: 3rem;
+    accent-color: green;
+  }
+   */
+/* .pilgan {
+    border :  3px solid #000;;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    content: 'A';
+    font-size: 20px;
+    color: blue;
+}
+.pilgan:checked{
+    border: 3px solid #67C6E3;
+    appearance: none;
+    background-color: #67C6E3;
+    color: white;
+    font-size: 20px;
+}
+.textCheck{
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    font-weight: 800;
+    margin-left: 20px;
+    /* right: 17px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: default; */
+    

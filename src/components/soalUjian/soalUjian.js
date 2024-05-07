@@ -43,8 +43,8 @@ const SoalUjian = () => {
        
           <div className='row column-gap-3 g-0 d-flex justify-content-center'>
             <div className='col-7 bg-light shadow-sm me-auto ms-5'>
-              <div className='text-end'>
-                hasjd
+              <div className='text-end me-3 p-3'>
+                <h4>00 : 00 : 00</h4>
               </div>
               <Soal
               getSoalUjianResult = {getSoalUjianResult}
@@ -66,7 +66,7 @@ const SoalUjian = () => {
                       // console.log(getSoalUjianResult.data)
                       // setSoalUjian(soal)
                       return(
-                        <div className='ms-1 col-2 border border-3 justify-content-center border-dark align-items-center py-1 btn btn-;o g-0 p-0 m-0' onClick={()=>{setNoSoal(index)}}>
+                        <div className='ms-1 col-2 border border-3 justify-content-center border-dark align-items-center py-1 btn btn-light g-0 p-0 m-0' onClick={()=>{setNoSoal(index)}}>
                             <h5 className='pt-2 text-center' >{soal.number}</h5>
                         </div> 
                       )

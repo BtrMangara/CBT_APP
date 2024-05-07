@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from './img/twh.webp'
 import './css/navbar.css'
 import { FaCircleUser } from "react-icons/fa6";
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { Dashboard } from './dashboard';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ export const Navbar = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 px-3 g-col-3">
                 <li class="nav-item ">
-                  <a class="nav-link fs-5" href="#">Berita</a>
+                  <a class="nav-link fs-5" href="/berita">Berita</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link fs-5" href="#">Pengumuman</a>
@@ -69,7 +69,8 @@ export const Navbar = () => {
       </nav>
 
       <div>
-      <Dashboard/>
+      {/* <Dashboard/> */}
+      <Outlet/>
       </div>
         
 
